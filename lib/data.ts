@@ -1,0 +1,178 @@
+import type { Category, Product, ProcessStep, ShippingRegion } from '@/types'
+
+export const categories: Category[] = [
+  { id: "anillos",    name: "Anillos",    count: 24, tone: "navy",  layout: "a" },
+  { id: "aretes",     name: "Aretes",     count: 31, tone: "blue",  layout: "b" },
+  { id: "collares",   name: "Collares",   count: 18, tone: "ink",   layout: "c" },
+  { id: "pulseras",   name: "Pulseras",   count: 22, tone: "navy",  layout: "d" },
+  { id: "tobilleras", name: "Tobilleras", count: 9,  tone: "blue",  layout: "e" },
+]
+
+export const products: Product[] = [
+  {
+    id: "01",
+    name: "Anillo Mosaico Plata",
+    cat: "Anillos",
+    catId: "anillos",
+    price: 28900,
+    img: "/images/jewels/anillos-mosaico-plata.jpeg",
+    desc: "Anillo abierto en plata con incrustaciones de piedras y resinas de colores en mosaico. Cada pieza es única — los patrones de color nunca se repiten exactamente. Ajustable.",
+    materials: ["Plata 925", "Piedras de colores", "Resinas"],
+    variants: [
+      { id: "verde",  name: "Verde · Azul",  color: "#2f8a6e" },
+      { id: "morado", name: "Morado · Rojo", color: "#7a2e6c" },
+      { id: "geom",   name: "Geométrico",    color: "#c8a32a" },
+    ],
+    sizes: ["Ajustable"],
+    details: { "Material": "Plata 925", "Inlay": "Piedras + resinas", "Tamaño": "Ajustable", "Tiempo": "5–7 días" },
+  },
+  {
+    id: "02",
+    name: "Dije Espiral del Mar",
+    cat: "Collares",
+    catId: "collares",
+    price: 32500,
+    img: "/images/jewels/dijes-espiral-azul.jpeg",
+    desc: "Dije ovalado en plata con espiral central inscrita y mosaico de lapislázuli y crisocola. La forma evoca un caracol marino. Cadena de plata 50 cm incluida.",
+    materials: ["Plata 925", "Lapislázuli", "Crisocola"],
+    variants: [
+      { id: "lapis",    name: "Lapislázuli puro",    color: "#1c3a5e" },
+      { id: "crisocola", name: "Lapis + crisocola", color: "#2f8a8a" },
+      { id: "color",    name: "Multicolor",          color: "#3a5a8a" },
+    ],
+    details: { "Material": "Plata 925", "Piedras": "Lapislázuli · Crisocola", "Cadena": "50 cm incluida", "Tiempo": "7–10 días" },
+  },
+  {
+    id: "03",
+    name: "Pulsera Olas",
+    cat: "Pulseras",
+    catId: "pulseras",
+    price: 42000,
+    img: "/images/jewels/pulsera-espiral-azul.jpeg",
+    desc: "Pulsera de eslabones circulares en plata, cada uno con una espiral de crisocola y lapislázuli. Ocho discos enlazados forman una ola continua alrededor de la muñeca.",
+    materials: ["Plata 925", "Crisocola", "Lapislázuli"],
+    variants: [
+      { id: "azul-verde", name: "Azul · Verde", color: "#2f8a8a" },
+      { id: "azul",       name: "Solo azul",    color: "#1c3a5e" },
+    ],
+    details: { "Material": "Plata 925", "Piedras": "Crisocola · Lapislázuli", "Largo": "19 cm", "Cierre": "Mosquetón", "Tiempo": "10–14 días" },
+  },
+  {
+    id: "04",
+    name: "Dije Pirita Lapis",
+    cat: "Collares",
+    catId: "collares",
+    price: 38500,
+    img: "/images/jewels/dije-lapis-pirita.jpeg",
+    desc: "Dije en cobre con incrustación de lapislázuli y espiral de pirita en el centro. La pirita brilla como pequeñas estrellas. Pieza para regalar — viene en bolsa de algodón con tarjeta firmada.",
+    materials: ["Cobre", "Lapislázuli", "Pirita"],
+    variants: [
+      { id: "cobre",   name: "Cobre natural", color: "#a85a3a" },
+      { id: "vermeil", name: "Vermeil",        color: "#d4b582" },
+    ],
+    details: { "Material": "Cobre", "Piedras": "Lapislázuli · Pirita", "Cadena": "Opcional", "Tiempo": "7–10 días" },
+  },
+  {
+    id: "05",
+    name: "Anillo Cobre Mosaico",
+    cat: "Anillos",
+    catId: "anillos",
+    price: 34900,
+    img: "/images/jewels/anillos-cobre-mosaico.jpeg",
+    desc: "Anillo ancho en cobre con mosaico de piedras de colores incrustadas. Pieza con presencia, pensada para usar sola. Disponible también con espiral grabada en cobre liso.",
+    materials: ["Cobre", "Piedras de colores"],
+    variants: [
+      { id: "rojo-morado", name: "Rojo · Morado",  color: "#a02a3a" },
+      { id: "espiral",     name: "Espiral pulida", color: "#a85a3a" },
+      { id: "verde",       name: "Verde · Azul",   color: "#2f7a4a" },
+    ],
+    sizes: ["12", "14", "16", "18", "20"],
+    details: { "Material": "Cobre", "Inlay": "Piedras de colores", "Ancho": "12 mm", "Tiempo": "7–10 días" },
+  },
+  {
+    id: "06",
+    name: "Espiral Solar",
+    cat: "Anillos",
+    catId: "anillos",
+    price: 38500,
+    desc: "Anillo en plata 925 con un disco circular martillado a mano. Cada pieza lleva la marca de un golpe único — no hay dos iguales. Inspirado en los espirales rupestres del norte de Chile.",
+    materials: ["Plata 925", "Acabado mate"],
+    variants: [
+      { id: "plata", name: "Plata 925", color: "#c9c9d1" },
+      { id: "oro",   name: "Oro 18k",  color: "#d4b582" },
+      { id: "cobre", name: "Cobre",    color: "#a85a3a" },
+    ],
+    sizes: ["12", "14", "16", "18", "20"],
+    details: { "Material": "Plata 925", "Acabado": "Martillado mate", "Origen": "Hecho en Santiago", "Tiempo": "5–7 días hábiles" },
+  },
+  {
+    id: "07",
+    name: "Lágrima de Mar",
+    cat: "Aretes",
+    catId: "aretes",
+    price: 24900,
+    desc: "Aretes largos con piedra lapislázuli engastada en plata. La piedra viene de la cordillera, cada una con vetas únicas. Cierre tipo gancho francés.",
+    materials: ["Plata 925", "Lapislázuli"],
+    variants: [
+      { id: "lapis", name: "Lapislázuli",      color: "#1c3a5e" },
+      { id: "agata", name: "Ágata azul",        color: "#7ba8c8" },
+      { id: "perla", name: "Perla cultivada",   color: "#efe6d3" },
+    ],
+    details: { "Material": "Plata 925 · Lapislázuli", "Largo": "4.2 cm", "Cierre": "Gancho francés", "Tiempo": "3–5 días" },
+  },
+  {
+    id: "08",
+    name: "Cordón Marino",
+    cat: "Para Él",
+    catId: "hombre",
+    price: 32000,
+    desc: "Pulsera para hombre en cordón naval encerado y broche de plata. Resistente al agua, pensada para llevar siempre puesta.",
+    materials: ["Plata 925", "Cordón encerado"],
+    variants: [
+      { id: "navy", name: "Azul marino", color: "#0f2a44" },
+      { id: "ink",  name: "Negro",       color: "#0a1622" },
+      { id: "rust", name: "Tabaco",      color: "#a85a3a" },
+    ],
+    details: { "Material": "Plata 925 · Cordón", "Cierre": "Broche magnético", "Largo": "18–22 cm", "Tiempo": "3–4 días" },
+  },
+  {
+    id: "09",
+    name: "Cruz del Sur",
+    cat: "Religiosa",
+    catId: "religiosa",
+    price: 41200,
+    desc: "Crucifijo pequeño con cuatro turquesas, una por cada estrella de la Cruz del Sur. Plata 925 con baño antiguo.",
+    materials: ["Plata 925", "Turquesa"],
+    variants: [
+      { id: "plata", name: "Plata 925", color: "#c9c9d1" },
+      { id: "oro",   name: "Vermeil",   color: "#b8935a" },
+    ],
+    details: { "Material": "Plata 925 · Turquesa", "Largo": "3.6 cm", "Cadena": "Incluida 50 cm", "Tiempo": "5–7 días" },
+  },
+]
+
+export const processSteps: ProcessStep[] = [
+  { num: "01", name: ["Diseño y", { it: "boceto" }], desc: "Conversamos contigo o partimos de un boceto en papel." },
+  { num: "02", name: ["Selección", "de", { it: "material" }], desc: "Plata 925, oro 18k, piedras de la cordillera. Solo trabajamos con materiales que podemos rastrear." },
+  { num: "03", name: ["Forja a", { it: "mano" }], desc: "Martillado, fundido y soldado en nuestro taller en Santiago." },
+  { num: "04", name: ["Acabado", "y", { it: "envío" }], desc: "Pulido y empacado. Listo para enviarse a cualquier lugar de Chile." },
+]
+
+export const shippingRegions: ShippingRegion[] = [
+  { region: "Santiago Centro",     time: "24–48 h" },
+  { region: "Región Metropolitana", time: "2–3 días" },
+  { region: "Norte Grande",        time: "3–5 días" },
+  { region: "Norte Chico",         time: "3–4 días" },
+  { region: "Valparaíso",          time: "2–3 días" },
+  { region: "Biobío y Araucanía",  time: "3–4 días" },
+  { region: "Los Lagos",           time: "4–5 días" },
+  { region: "Aysén / Magallanes",  time: "5–7 días" },
+]
+
+export const catImages: Record<string, string> = {
+  anillos:   "/images/jewels/anillos-mosaico-plata.jpeg",
+  collares:  "/images/jewels/dijes-espiral-azul.jpeg",
+  pulseras:  "/images/jewels/pulsera-espiral-azul.jpeg",
+  religiosa: "/images/jewels/dije-lapis-pirita.jpeg",
+  hombre:    "/images/jewels/anillos-cobre-mosaico.jpeg",
+}
