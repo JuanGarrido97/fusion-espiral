@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[484,[],"ViewportBoundary"]
+3:I[484,[],"MetadataBoundary"]
+4:"$Sreact.suspense"
+5:I[6869,[],"IconMark"]
+0:{"rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Fusión Espiral — Joyería Artesanal"}],["$","meta","1",{"name":"description","content":"Piezas únicas en plata, oro y piedras de la cordillera. Hechas a mano por la Familia Garrido en Santiago de Chile."}],["$","meta","2",{"name":"keywords","content":"joyería artesanal,plata 925,joyas Chile,Santiago,anillos,collares"}],["$","link","3",{"rel":"icon","href":"/fusion-espiral/favicon.ico?603d046c9a6fdfbb","type":"image/x-icon","sizes":"16x16"}],["$","$L5","4",{}]]}]}]}],null]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"JCEWPf6_4O8XLs4cQm0nT"}
