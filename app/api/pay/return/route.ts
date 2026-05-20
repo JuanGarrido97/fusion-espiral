@@ -7,12 +7,26 @@ import {
   IntegrationCommerceCodes,
 } from 'transbank-sdk'
 
-export async function POST(req: Request) {
+async function handleReturn(req: Request) {
   const base = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000'
 
   try {
-    const formData = await req.formData()
-    const token = formData.get('token_ws') as string | null
+    const url = new URL(req.url)
+    let token = url.searchParams.get('token_ws')
+    let tbkToken = url.searchParams.get('TBK_TOKEN')
+
+    if (!token && !tbkToken) {
+      try {
+        const formData = await req.formData()
+        token = formData.get('token_ws') as string | null
+        tbkToken = formData.get('TBK_TOKEN') as string | null
+      } catch { /* no body */ }
+    }
+
+    // Cancelación por el usuario — no llamar commit
+    if (tbkToken && !token) {
+      return NextResponse.redirect(new URL('/pago?status=cancelled', base))
+    }
 
     if (!token) {
       return NextResponse.redirect(new URL('/pago?status=cancelled', base))
@@ -41,6 +55,10 @@ export async function POST(req: Request) {
     return NextResponse.redirect(new URL('/pago?status=failed', base))
   } catch (err) {
     console.error('Webpay commit error:', err)
-    return NextResponse.redirect(new URL('/pago?status=failed', base))
+    const base2 = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000'
+    return NextResponse.redirect(new URL('/pago?status=failed', base2))
   }
 }
+
+export async function POST(req: Request) { return handleReturn(req) }
+export async function GET(req: Request) { return handleReturn(req) }

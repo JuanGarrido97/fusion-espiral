@@ -25,6 +25,7 @@ export async function POST(req: Request) {
     const returnUrl = `${base}/api/pay/return`
 
     const response = await tx.create(buyOrder, sessionId, amount, returnUrl)
+    console.log('\n✅ WEBPAY TOKEN:', response.token, '\n')
     return NextResponse.json({ token: response.token, url: response.url })
   } catch (err) {
     console.error('Webpay create error:', err)
