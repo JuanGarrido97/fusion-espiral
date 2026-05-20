@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from 'react'
 interface RevealProps {
   children: React.ReactNode
   delay?: number
-  as?: keyof JSX.IntrinsicElements
+  as?: keyof React.JSX.IntrinsicElements
   className?: string
   [key: string]: unknown
 }

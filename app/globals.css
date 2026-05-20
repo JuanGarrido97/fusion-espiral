@@ -1780,3 +1780,76 @@ button { font-family: inherit; cursor: pointer; }
   pointer-events: none;
   opacity: 0.1;
 }
+
+/* ============================================
+   CARRITO — ESTADO DE ERROR
+   ============================================ */
+
+.cart__error {
+  background: rgba(168,90,58,0.12);
+  color: var(--rust);
+  border: 1px solid rgba(168,90,58,0.3);
+  padding: 10px 14px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+.cart__btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ============================================
+   PÁGINA DE PAGO
+   ============================================ */
+
+.pago-page {
+  min-height: 100vh;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px var(--gutter);
+}
+.pago-card {
+  max-width: 520px;
+  width: 100%;
+  background: var(--paper);
+  border: 1px solid rgba(10,22,34,0.1);
+  padding: 60px 56px;
+  text-align: center;
+}
+.pago-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 28px;
+}
+.pago-icon--ok { background: rgba(58,124,165,0.12); color: var(--blue); }
+.pago-icon--err { background: rgba(168,90,58,0.1); color: var(--rust); }
+.pago-card .display { font-size: clamp(32px, 5vw, 52px); line-height: 1; margin: 0; }
+.pago-desc {
+  color: rgba(10,22,34,0.6);
+  margin: 16px 0 0;
+  line-height: 1.6;
+}
+.pago-detail {
+  margin-top: 32px;
+  border-top: 1px solid rgba(10,22,34,0.1);
+}
+.pago-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(10,22,34,0.08);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.pago-row span:first-child { color: rgba(10,22,34,0.5); }
+@media (max-width: 520px) {
+  .pago-card { padding: 40px 28px; }
+}

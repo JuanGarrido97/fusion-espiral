@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useRef } from 'react'
 import PH from '@/components/shared/PH'
 import { formatCLP } from '@/lib/formatters'
 import type { CartItem } from '@/types'
@@ -13,10 +14,41 @@ interface CartDrawerProps {
 }
 
 export default function CartDrawer({ open, onClose, items, onQty, onRemove }: CartDrawerProps) {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const formRef = useRef<HTMLFormElement>(null)
+
   if (!open) return null
 
   const subtotal = items.reduce((a, b) => a + b.price * b.qty, 0)
   const ship = items.length ? 4990 : 0
+
+  const handlePay = async () => {
+    if (!items.length) return
+    setLoading(true)
+    setError(null)
+    try {
+      const res = await fetch('/api/pay/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: subtotal + ship }),
+      })
+      const data = await res.json()
+      if (!res.ok || !data.token) throw new Error(data.error ?? 'Error al iniciar pago')
+
+      // Webpay requiere POST con form hacia su URL
+      if (formRef.current) {
+        const form = formRef.current
+        form.action = data.url
+        const input = form.querySelector<HTMLInputElement>('input[name="token_ws"]')!
+        input.value = data.token
+        form.submit()
+      }
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Error desconocido')
+      setLoading(false)
+    }
+  }
 
   return (
     <>
@@ -82,10 +114,20 @@ export default function CartDrawer({ open, onClose, items, onQty, onRemove }: Ca
             <span className="cart__total-l">Total</span>
             <span className="cart__total-r">{formatCLP(subtotal + ship)}</span>
           </div>
-          <button className="btn cart__btn">
-            Ir a pagar <span className="arrow" />
+          {error && <div className="cart__error">{error}</div>}
+          <button
+            className="btn cart__btn"
+            onClick={handlePay}
+            disabled={loading || !items.length}
+          >
+            {loading ? 'Redirigiendo…' : <>Ir a pagar <span className="arrow" /></>}
           </button>
           <div className="cart__note">Pago seguro · Webpay · Transferencia</div>
+
+          {/* Form oculto para redirigir a Webpay vía POST */}
+          <form ref={formRef} method="POST" style={{ display: 'none' }}>
+            <input type="hidden" name="token_ws" defaultValue="" />
+          </form>
         </footer>
       </aside>
     </>
